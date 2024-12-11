@@ -2,8 +2,8 @@
   "name": "backend",
   "version": "0.0.0",
   "private": true,
-      "main": "main.js",
-    "type": "module",
+  "main": "main.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon app.js",
     "start": "node app.js"
