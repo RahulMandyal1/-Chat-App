@@ -6,8 +6,6 @@ import { chatGroups } from "../../data/chatDummy"
 export default function HomeScreen() {
 
   const renderItem = ({ item }) => <ChatItem item={item} onPress={() => { }} />;
-
-
   return (
     <ThemedView>
       <FlatList

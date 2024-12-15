@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "client",
-    "slug": "client",
+    "slug": "chat-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -15,13 +15,25 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.rahulthakurcoder.chatapp"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
+      "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },  
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {}
+  },
+
     "plugins": [
       "expo-router",
       [
@@ -36,6 +48,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "0002cc1a-c83d-422c-bcc0-a178b5603998"
+      }
+    },
+    "owner": "rahulthakurcoder"
   }
 }

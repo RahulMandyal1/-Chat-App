@@ -2,6 +2,9 @@ import React from "react";
 import { Image, StyleSheet, TouchableOpacity, ImageSourcePropType } from "react-native";
 import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/ThemedText";
+import AvatarGroup from "./AvatarGroup";
+import { router } from "expo-router";
+
 
 interface ChatItemProps {
   item: {
@@ -15,14 +18,10 @@ interface ChatItemProps {
   onPress?: () => void; // Optional press handler
 }
 
-const ChatItem: React.FC<ChatItemProps> = ({ item, onPress }) => (
-  <TouchableOpacity style={styles.chatContainer} onPress={onPress}>
+const ChatItem: React.FC<ChatItemProps> = ({ item}) => (
+  <TouchableOpacity style={styles.chatContainer} onPress={()=>router.navigate("/chat") }>
     {/* Avatar Section */}
-    <ThemedView style={styles.avatarContainer}>
-      {item.avatars.map((avatar, index) => (
-        <Image key={index} source={{ uri: avatar }} style={styles.avatar} />
-      ))}
-    </ThemedView>
+    <AvatarGroup users={item.avatars} />
 
     {/* Chat Content */}
     <ThemedView style={styles.chatContent}>
@@ -46,19 +45,12 @@ const styles = StyleSheet.create({
   chatContainer: {
     flexDirection: "row",
     alignItems: "center",
-    borderRadius: 10,
-    padding: 15,
     marginBottom: 10,
+    gap : 16
   },
   avatarContainer: {
     marginRight: 10,
     flexDirection: "row",
-  },
-  avatar: {
-    width: 45,
-    height: 45,
-    borderRadius: 25,
-    marginLeft: -10,
   },
   chatContent: {
     flex: 1,
