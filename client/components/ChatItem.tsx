@@ -3,6 +3,7 @@ import { Image, StyleSheet, TouchableOpacity, ImageSourcePropType } from "react-
 import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/ThemedText";
 import AvatarGroup from "./AvatarGroup";
+import { router } from "expo-router";
 
 
 interface ChatItemProps {
@@ -17,8 +18,8 @@ interface ChatItemProps {
   onPress?: () => void; // Optional press handler
 }
 
-const ChatItem: React.FC<ChatItemProps> = ({ item, onPress }) => (
-  <TouchableOpacity style={styles.chatContainer} onPress={onPress}>
+const ChatItem: React.FC<ChatItemProps> = ({ item}) => (
+  <TouchableOpacity style={styles.chatContainer} onPress={()=>router.navigate("/chat") }>
     {/* Avatar Section */}
     <AvatarGroup users={item.avatars} />
 
