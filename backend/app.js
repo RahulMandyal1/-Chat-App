@@ -1,8 +1,8 @@
 import express from "express";
 import http from "http";
 import { Server } from "socket.io";
-import authRoutes from "./routes/auth.route.js";
-import messageRoutes from "./routes/message.route.js";
+import authRoutes from "./src/routes/auth.route.js";
+import messageRoutes from "./src/routes/message.route.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
