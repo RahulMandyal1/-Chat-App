@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { StyleSheet, View, Pressable } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
@@ -5,17 +6,20 @@ import { ThemedView } from '@/components/ThemedView';
 import { useForm } from 'react-hook-form';
 import InputBox from '@/components/InputBox';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Link } from 'expo-router';
 
 
-const SignIn = () => {
-  const { control, handleSubmit, formState: { errors , isValid } } = useForm({
+
+
+const Signup = () => {
+  const { control, handleSubmit, formState: { errors, isValid } } = useForm({
     defaultValues: {
       email: '',
       password: '',
       confirmPassword: ''
     },
     mode: "onChange"
-        
+
   });
 
   const onSubmit = (data) => {
@@ -27,7 +31,10 @@ const SignIn = () => {
       <ThemedView style={styles.container}>
 
         <ThemedView style={styles.header}>
-          <ThemedText type={'title'} style={styles.title}>Login to your account</ThemedText>
+          <ThemedText type={'title'} style={styles.title}>Create Account</ThemedText>
+          <ThemedText style={styles.subtitle}>
+            Create an account to start chatting with friends and explore the community!
+          </ThemedText>
         </ThemedView>
 
         <ThemedView style={styles.form}>
@@ -65,15 +72,37 @@ const SignIn = () => {
             }}
             error={errors.password}
           />
+
+          <InputBox
+            control={control}
+            name="confirmPassword"
+            label="Confirm Password"
+            placeholder="Confirm your password"
+            rules={{
+              required: 'Please confirm your password',
+              validate: (value, formValues) =>
+                value === formValues.password || 'Passwords do not match'
+            }}
+            error={errors.confirmPassword}
+          />
         </ThemedView>
 
         <Pressable
-          style={!isValid ?[styles.button , styles.buttonDisabled] : styles.button}
+          style={!isValid ? [styles.button, styles.buttonDisabled] : styles.button}
           onPress={handleSubmit(onSubmit)}
           disabled={!isValid}
         >
-          <ThemedText style={styles.buttonText}>Sign up</ThemedText>
+          <ThemedText style={styles.buttonText}>Signup</ThemedText>
         </Pressable>
+
+
+
+        <Link href="/auth/login" style={styles.noAccountTextContainer}><ThemedText style={styles.noAccountText}>
+          Already have an Account?
+        </ThemedText>
+        </Link>
+
+
       </ThemedView>
 
     </SafeAreaView>
@@ -114,10 +143,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
-    buttonDisabled: {
-    backgroundColor: '#D1D5DB', 
+  buttonDisabled: {
+    backgroundColor: '#D1D5DB',
   },
-    
+
+  noAccountTextContainer: {
+    textAlign: "center",
+    paddingVertical: 10,
+  },
+
+  noAccountText: {
+    textAlign: "center",
+  }
 });
 
-export default SignIn;
+export default Signup;
