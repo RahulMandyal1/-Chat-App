@@ -8,7 +8,6 @@ import { router, Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
-import "react-native-reanimated";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 import SocketProvider from "@/context/SocketProvider";
@@ -48,6 +47,9 @@ export default function RootLayout() {
         >
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
+          <Stack.Screen name="auth" options={{
+            headerShown : false
+          }} />
           <Stack.Screen name="chat" options={{headerShown : true ,headerTitle : 'Message',  headerLeft: () => <HeaderBackButton  onPress={router.back}/>}}/>
         </Stack>
         <StatusBar style="auto" />
