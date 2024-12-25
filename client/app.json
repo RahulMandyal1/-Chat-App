@@ -23,17 +23,16 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-      "build": {
-    "development": {
-      "developmentClient": true,
-      "distribution": "internal"
-    },  
-    "preview": {
-      "distribution": "internal"
+    "build": {
+      "development": {
+        "developmentClient": true,
+        "distribution": "internal"
+      },
+      "preview": {
+        "distribution": "internal"
+      },
+      "production": {}
     },
-    "production": {}
-  },
-
     "plugins": [
       "expo-router",
       [
@@ -44,7 +43,8 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true
