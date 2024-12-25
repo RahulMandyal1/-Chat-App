@@ -12,18 +12,18 @@ import { Link } from 'expo-router';
 
 
 const Signup = () => {
-  const { control, handleSubmit, formState: { errors, isValid } } = useForm({
+  const { control, handleSubmit, formState: { errors, isValid }} = useForm({
     defaultValues: {
       email: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      displayName: ''
     },
     mode: "onChange"
 
   });
 
   const onSubmit = (data) => {
-    console.log('Form data:', data);
   };
 
   return (
@@ -53,6 +53,23 @@ const Signup = () => {
             }}
             error={errors.email}
           />
+
+          <InputBox
+            control={control}
+            name="displayName"
+            label="Display Name"
+            placeholder="Enter your full name"
+            rules={{
+              required: 'Display name is required',
+              minLength: {
+                value: 3,
+                message: 'Display name must be at least 3 characters'
+              }
+            }}
+            error={errors.displayName}
+          />
+
+
 
           <InputBox
             control={control}
