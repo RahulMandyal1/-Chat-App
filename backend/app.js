@@ -5,6 +5,7 @@ import authRoutes from "./src/routes/auth.route.js";
 import messageRoutes from "./src/routes/message.route.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import { connectDB } from "./src/lib/db.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -14,6 +15,8 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
+
+connectDB();
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
