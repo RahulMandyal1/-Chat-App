@@ -13,7 +13,7 @@ interface LoginCredentials {
   password: string;
 }
 
-const API_URL = "http://localhost:3000/api/v1/auth/"; //TODO: change this later
+const API_URL = "http://localhost:3000/api/v1/auth";
 
 export const registerUser = async ({
   fullName,
@@ -24,12 +24,16 @@ export const registerUser = async ({
   email: string;
   password: string;
 }): Promise<User> => {
-  const response = await axios.post(API_URL, {
-    fullName,
-    email,
-    password,
-  });
-  return response.data;
+  try {
+    const response = await axios.post(`${API_URL}/signup`, {
+      fullName,
+      email,
+      password,
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Registration failed");
+  }
 };
 
 export const login = async ({
@@ -41,10 +45,8 @@ export const login = async ({
       email,
       password,
     });
-
-    const data = await response.data;
-    return data;
+    return response.data;
   } catch (error) {
-    throw error;
+    throw new Error(error.response?.data?.message || "Login failed");
   }
 };

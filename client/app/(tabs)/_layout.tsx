@@ -10,18 +10,15 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import GradientHeader from '@/components/GrdientHeader';
+import { AuthService } from '@/utils/auth';
 
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
- const user = null
 
-
-
-  if (!user) { 
-    return<Redirect href='/auth/login'/>
+  if (!AuthService.isAuthenticated()) {
+    return <Redirect href={'/auth/login'}/>
   }
-
 
   return (
     <Tabs
