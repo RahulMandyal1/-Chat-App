@@ -41,10 +41,6 @@ const Signup = () => {
     });
   };
 
-  console.log(
-
-   mutation ,'mutation mmmm' 
-  )
 
   return (
     <SafeAreaView style={{ flex: 1 }} >
