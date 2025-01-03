@@ -9,6 +9,10 @@ export const AuthService = {
     return await SecureStore.getItemAsync(TOKEN_KEY);
   },
 
+  setToken: async (token: string): Promise<void> => {
+    await SecureStore.setItemAsync(TOKEN_KEY, token);
+  },
+
   isAuthenticated: async (): Promise<boolean> => {
     const token = await SecureStore.getItemAsync(TOKEN_KEY);
     if (!token) return false;

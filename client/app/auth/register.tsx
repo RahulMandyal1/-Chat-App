@@ -1,15 +1,15 @@
 
 import React from 'react';
-import { StyleSheet, View, Pressable } from 'react-native';
+import { StyleSheet, View, Pressable, ActivityIndicator } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useForm } from 'react-hook-form';
 import InputBox from '@/components/InputBox';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Link } from 'expo-router';
-
-
-
+import { Link, router } from 'expo-router';
+import { useMutation } from '@tanstack/react-query';
+import { registerUser } from '@/api/authAPI';
+import { AuthService } from '@/utils/auth';
 
 const Signup = () => {
   const { control, handleSubmit, formState: { errors, isValid }} = useForm({
@@ -20,16 +20,31 @@ const Signup = () => {
       displayName: ''
     },
     mode: "onChange"
+  });
 
+  const mutation = useMutation({
+    mutationFn: registerUser,
+    onSuccess: (data) => {
+      AuthService.setToken(data.accessToken)
+      router.navigate('/')
+    },
+    onError: (error) => {
+      console.error('Signup failed:', error);
+    }
   });
 
   const onSubmit = (data) => {
+    mutation.mutate({
+      email: data.email,
+      password: data.password,
+      fullName: data.displayName
+    });
   };
+
 
   return (
     <SafeAreaView style={{ flex: 1 }} >
       <ThemedView style={styles.container}>
-
         <ThemedView style={styles.header}>
           <ThemedText type={'title'} style={styles.title}>Create Account</ThemedText>
           <ThemedText style={styles.subtitle}>
@@ -69,8 +84,6 @@ const Signup = () => {
             error={errors.displayName}
           />
 
-
-
           <InputBox
             control={control}
             name="password"
@@ -104,24 +117,23 @@ const Signup = () => {
           />
         </ThemedView>
 
-        <Pressable
-          style={!isValid ? [styles.button, styles.buttonDisabled] : styles.button}
-          onPress={handleSubmit(onSubmit)}
-          disabled={!isValid}
-        >
-          <ThemedText style={styles.buttonText}>Signup</ThemedText>
-        </Pressable>
-
-
+          <Pressable
+            style={!isValid ? [styles.button, styles.buttonDisabled] : styles.button}
+            onPress={handleSubmit(onSubmit)}
+            disabled={!isValid || mutation.isPending}
+          >
+          <ThemedText style={styles.buttonText}>{mutation.isPending ? 'Loading ...' :'Signup'}</ThemedText>
+          </Pressable>
+    
+        {mutation.isError && (
+          <ThemedText style={styles.errorText}>Signup failed. Please try again.</ThemedText>
+        )}
 
         <Link href="/auth/login" style={styles.noAccountTextContainer}><ThemedText style={styles.noAccountText}>
           Already have an Account?
         </ThemedText>
         </Link>
-
-
       </ThemedView>
-
     </SafeAreaView>
   );
 };
@@ -163,15 +175,19 @@ const styles = StyleSheet.create({
   buttonDisabled: {
     backgroundColor: '#D1D5DB',
   },
-
+  errorText: {
+    color: 'red',
+    textAlign: 'center',
+    marginVertical: 10,
+  },
   noAccountTextContainer: {
     textAlign: "center",
     paddingVertical: 10,
   },
-
   noAccountText: {
     textAlign: "center",
   }
 });
 
 export default Signup;
+
