@@ -1,22 +1,20 @@
 import { Redirect, Tabs } from 'expo-router';
 import React from 'react';
 import { Platform } from 'react-native';
-
 import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import GradientHeader from '@/components/GrdientHeader';
-import { AuthService } from '@/utils/auth';
+import { isAuthenticated } from '@/utils/auth';
 
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
-  if (!AuthService.isAuthenticated()) {
+  if (isAuthenticated()) {
     return <Redirect href={'/auth/login'}/>
   }
 

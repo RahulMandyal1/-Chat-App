@@ -9,7 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Link, router } from 'expo-router';
 import { useMutation } from '@tanstack/react-query';
 import { registerUser } from '@/api/authAPI';
-import { AuthService } from '@/utils/auth';
+import { setToken } from '@/utils/auth';
 
 const Signup = () => {
   const { control, handleSubmit, formState: { errors, isValid }} = useForm({
@@ -25,7 +25,7 @@ const Signup = () => {
   const mutation = useMutation({
     mutationFn: registerUser,
     onSuccess: (data) => {
-      AuthService.setToken(data.accessToken)
+      setToken(data.accessToken)
       router.navigate('/')
     },
     onError: (error) => {

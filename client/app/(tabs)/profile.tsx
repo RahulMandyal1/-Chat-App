@@ -4,7 +4,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { AuthService } from "@/utils/auth";
+import { logout } from "@/utils/auth";
 
 
 export default function TabTwoScreen() {
@@ -34,7 +34,7 @@ export default function TabTwoScreen() {
           </ThemedText>
         </Pressable>
 
-     <Pressable style={styles.button} onPress={AuthService.logout}>
+     <Pressable style={styles.button} onPress={logout}>
           <ThemedText>
             Logout
           </ThemedText>
