@@ -8,13 +8,14 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import GradientHeader from '@/components/GrdientHeader';
-import { isAuthenticated } from '@/utils/auth';
+import * as SecureStore from "expo-secure-store";
+
 
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-
-  if (isAuthenticated()) {
+  
+  if (!SecureStore.getItem("access_token" )) {
     return <Redirect href={'/auth/login'}/>
   }
 

@@ -28,14 +28,14 @@ const ChatDetail = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // Ensure the container takes the entire screen
+    flex: 1,
   },
   inputBoxContainer: {
-    position: "absolute", // Fix the InputBox at the bottom
+    position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: "#FFFFFF", // Optional: Add background color for clarity
+    backgroundColor: "#FFFFFF", 
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderTopWidth: 1,

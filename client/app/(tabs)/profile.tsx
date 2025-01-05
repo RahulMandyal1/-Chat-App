@@ -4,7 +4,9 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { logout } from "@/utils/auth";
+import * as SecureStore from "expo-secure-store";
+import { router } from "expo-router";
+
 
 
 export default function TabTwoScreen() {
@@ -18,6 +20,13 @@ export default function TabTwoScreen() {
       Alert.alert("Error", "Please enter some data");
     }
   };
+
+
+  const handleLogout =  async() => { 
+    await SecureStore.deleteItemAsync("access_token");
+    router.navigate("/auth/login");
+    
+  }
 
   return (
     <SafeAreaView>
@@ -34,7 +43,7 @@ export default function TabTwoScreen() {
           </ThemedText>
         </Pressable>
 
-     <Pressable style={styles.button} onPress={logout}>
+     <Pressable style={styles.button} onPress={handleLogout}>
           <ThemedText>
             Logout
           </ThemedText>
