@@ -4,6 +4,10 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import * as SecureStore from "expo-secure-store";
+import { router } from "expo-router";
+
+
 
 export default function TabTwoScreen() {
   const [inputValue, setInputValue] = useState("");
@@ -16,6 +20,13 @@ export default function TabTwoScreen() {
       Alert.alert("Error", "Please enter some data");
     }
   };
+
+
+  const handleLogout =  async() => { 
+    await SecureStore.deleteItemAsync("access_token");
+    router.navigate("/auth/login");
+    
+  }
 
   return (
     <SafeAreaView>
@@ -31,6 +42,14 @@ export default function TabTwoScreen() {
             Submit it
           </ThemedText>
         </Pressable>
+
+     <Pressable style={styles.button} onPress={handleLogout}>
+          <ThemedText>
+            Logout
+          </ThemedText>
+        </Pressable>
+
+
       </ThemedView>
     </SafeAreaView>
   );
