@@ -31,12 +31,6 @@ export default function RootLayout() {
 
   const queryClient = new QueryClient();
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
   if (!loaded) {
     return null;
   }
