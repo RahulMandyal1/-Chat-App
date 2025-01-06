@@ -2,6 +2,7 @@ import express from "express";
 import http from "http";
 import { Server } from "socket.io";
 import authRoutes from "./src/routes/auth.route.js";
+import userRoutes from "./src/routes/user.route.js";
 import messageRoutes from "./src/routes/message.route.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/messages", messageRoutes);
 
 io.on("connection", (socket) => {
