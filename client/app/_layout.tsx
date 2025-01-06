@@ -14,6 +14,7 @@ import SocketProvider from "@/context/SocketProvider";
 import { HeaderBackButton } from "@react-navigation/elements";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import AuthProvider from "@/context/AuthProvider";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -41,28 +42,31 @@ export default function RootLayout() {
         <ThemeProvider
           value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
         >
-          <Stack
-            screenOptions={{
-              headerShadowVisible: false,
-            }}
-          >
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="+not-found" />
-            <Stack.Screen
-              name="auth"
-              options={{
-                headerShown: false,
+          <AuthProvider>
+            <Stack
+              screenOptions={{
+                headerShadowVisible: false,
               }}
-            />
-            <Stack.Screen
-              name="chat"
-              options={{
-                headerShown: true,
-                headerTitle: "Message",
-                headerLeft: () => <HeaderBackButton onPress={router.back} />,
-              }}
-            />
-          </Stack>
+            >
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="+not-found" />
+              <Stack.Screen
+                name="auth"
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="chat"
+                options={{
+                  headerShown: true,
+                  headerTitle: "Message",
+                  headerLeft: () => <HeaderBackButton onPress={router.back} />,
+                }}
+              />
+            </Stack>
+          </AuthProvider>
+
           <StatusBar style="auto" />
         </ThemeProvider>
       </SocketProvider>
