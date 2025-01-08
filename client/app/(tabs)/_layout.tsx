@@ -8,7 +8,6 @@ import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import GradientHeader from '@/components/GrdientHeader';
 import * as SecureStore from "expo-secure-store";
 
 export default function TabLayout() {
