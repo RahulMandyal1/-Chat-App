@@ -9,6 +9,7 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import * as SecureStore from "expo-secure-store";
+import GradientHeader from '@/components/GradientHeader';
 
 export default function TabLayout() {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
