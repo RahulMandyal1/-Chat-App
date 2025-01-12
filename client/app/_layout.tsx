@@ -15,6 +15,7 @@ import { HeaderBackButton } from "@react-navigation/elements";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AuthProvider from "@/context/AuthProvider";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -38,38 +39,42 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SocketProvider>
-        <ThemeProvider
-          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-        >
-          <AuthProvider>
-            <Stack
-              screenOptions={{
-                headerShadowVisible: false,
-              }}
-            >
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-              <Stack.Screen name="+not-found" />
-              <Stack.Screen
-                name="auth"
-                options={{
-                  headerShown: false,
+      <GestureHandlerRootView>
+        <SocketProvider>
+          <ThemeProvider
+            value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+          >
+            <AuthProvider>
+              <Stack
+                screenOptions={{
+                  headerShadowVisible: false,
                 }}
-              />
-              <Stack.Screen
-                name="chat"
-                options={{
-                  headerShown: true,
-                  headerTitle: "Message",
-                  headerLeft: () => <HeaderBackButton onPress={router.back} />,
-                }}
-              />
-            </Stack>
-          </AuthProvider>
+              >
+                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                <Stack.Screen name="+not-found" />
+                <Stack.Screen
+                  name="auth"
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="chat"
+                  options={{
+                    headerShown: true,
+                    headerTitle: "Message",
+                    headerLeft: () => (
+                      <HeaderBackButton onPress={router.back} />
+                    ),
+                  }}
+                />
+              </Stack>
+            </AuthProvider>
 
-          <StatusBar style="auto" />
-        </ThemeProvider>
-      </SocketProvider>
+            <StatusBar style="auto" />
+          </ThemeProvider>
+        </SocketProvider>
+      </GestureHandlerRootView>
     </QueryClientProvider>
   );
 }
