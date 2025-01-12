@@ -43,18 +43,18 @@ export const settings: SettingItem[] = [
     title: "Custom Background Chat",
     hasArrow: true,
   },
-  {
-    id: "report",
-    icon: "warning",
-    title: "Report",
-    danger: true,
-  },
-  {
-    id: "block",
-    icon: "forbidden",
-    title: "Block",
-    danger: true,
-  },
+  // {
+  //   id: "report",
+  //   icon: "warning",
+  //   title: "Report",
+  //   danger: true,
+  // },
+  // {
+  //   id: "block",
+  //   icon: "forbidden",
+  //   title: "Block",
+  //   danger: true,
+  // },
 ];
 
 export interface SettingItem {

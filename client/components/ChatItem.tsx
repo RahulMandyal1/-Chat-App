@@ -21,17 +21,17 @@ interface ChatItemProps {
 const ChatItem: React.FC<ChatItemProps> = ({ item}) => (
   <TouchableOpacity style={styles.chatContainer} onPress={()=>router.navigate("/chat") }>
     {/* Avatar Section */}
-    <AvatarGroup users={item.avatars} />
+    <AvatarGroup users={[item.user]} />
 
     {/* Chat Content */}
     <ThemedView style={styles.chatContent}>
-      <ThemedText style={styles.chatTitle}>{item.name}</ThemedText>
-      <ThemedText style={styles.chatMessage}>{item.message}</ThemedText>
+      <ThemedText style={styles.chatTitle}>{item.user.name}</ThemedText>
+      <ThemedText style={styles.chatMessage}>{item.lastMessage}</ThemedText>
     </ThemedView>
 
     {/* Meta Info */}
     <ThemedView style={styles.chatMeta}>
-      <ThemedText style={styles.chatDate}>{item.date}</ThemedText>
+      <ThemedText style={styles.chatDate}>{item.time}</ThemedText>
       {item.unreadCount && item.unreadCount > 0 && (
         <ThemedView style={styles.unreadBadge}>
           <ThemedText style={styles.unreadCount}>{item.unreadCount}</ThemedText>

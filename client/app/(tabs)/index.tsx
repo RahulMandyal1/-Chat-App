@@ -7,7 +7,7 @@ export default function HomeScreen() {
 
   const renderItem = ({ item }) => <ChatItem item={item} onPress={() => { }} />;
   return (
-    <ThemedView>
+    <ThemedView style={styles.container}>
       <FlatList
         data={chatGroups}
         keyExtractor={(item) => item.id}
