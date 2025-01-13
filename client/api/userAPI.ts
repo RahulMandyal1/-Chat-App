@@ -2,7 +2,7 @@ import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 import { jwtDecode } from "jwt-decode";
 
-const API_URL = "http://localhost:3000/api/v1/user";
+const API_URL = `${process.env.EXPO_PUBLIC_API_URL}/api/v1/user`;
 
 interface User {
   _id: string;

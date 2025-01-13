@@ -13,7 +13,7 @@ interface LoginCredentials {
   password: string;
 }
 
-const API_URL = "http://localhost:3000/api/v1/auth";
+const API_URL = `${process.env.EXPO_PUBLIC_API_URL}/api/v1/auth`;
 
 export const registerUser = async ({
   fullName,
