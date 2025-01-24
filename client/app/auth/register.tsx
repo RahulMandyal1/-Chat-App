@@ -108,6 +108,7 @@ const Signup = () => {
               },
             }}
             error={errors.password}
+            inputType="password"
           />
 
           <InputBox
@@ -121,6 +122,7 @@ const Signup = () => {
                 value === formValues.password || "Passwords do not match",
             }}
             error={errors.confirmPassword}
+            inputType="password"
           />
         </ThemedView>
 

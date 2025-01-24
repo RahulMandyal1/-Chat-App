@@ -87,6 +87,7 @@ const Login = () => {
               },
             }}
             error={errors.password}
+            inputType={"password"}
           />
         </ThemedView>
 
